@@ -4,11 +4,15 @@
   "type": "module",
   "scripts": {
     "start": "bun src/index.ts",
-    "run-docker": "docker-compose up -d --build"
+    "run-docker": "docker-compose up -d --build",
+    "test": "vitest"
   },
   "devDependencies": {
     "@types/bun": "latest",
-    "@types/pg": "^8.11.8"
+    "@types/jest": "^30.0.0",
+    "@types/node": "^24.9.2",
+    "@types/pg": "^8.11.8",
+    "vitest": "^4.0.6"
   },
   "peerDependencies": {
     "typescript": "^5.0.0"
