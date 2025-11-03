@@ -1,6 +1,6 @@
 import Fastify from 'fastify';
 import { Pool } from 'pg';
-import { insertData, createBlockTable, blockValidation, computeBalances } from './helper.ts';
+import { insertData, createBlockTable, blockValidation, computeBalances, rollbackToHeight } from './helper.ts';
 import type { Block } from './interfaces.ts';
 
 const fastify = Fastify({ logger: true });
@@ -20,8 +20,9 @@ fastify.get('/balance/:address', async (req, rep) => {
   return {balance: computedBalance};
 });
 
-fastify.post('/rollback?height=number', async () => {
-  return { hello: 'world' };
+fastify.post('/rollback/:height', async (req, rep) => {
+    const { height } = req.params as {height: number};
+    return rollbackToHeight(blocks, height);
 });
 
 async function bootstrap() {
